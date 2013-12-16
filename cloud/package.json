@@ -4,6 +4,7 @@
   "dependencies" : {
     "fh-webapp" : "*",
     "fh-api" : "*",
-    "express" : "3.3.4"
+    "express" : "3.3.4",
+    "node-salesforce": "*"
   }
 }
