@@ -1,5 +1,6 @@
 var http = require('http'),
-sf = require('node-salesforce');
+sf = require('node-salesforce'),
+request = require('request');
 
 /**
  * Attempt to login to Salesforce through the SOAP mechanism given a username
@@ -198,21 +199,36 @@ conn.login(process.env.SF_TOPIC_USERNAME, process.env.SF_TOPIC_PASSWORD, functio
     var pushRequest = {
       'audience': 'all',
       'notification': {
-        'alert': 'Salesforce Account ' + sobject.Name + 'has been updated'
+        'alert': 'Salesforce Account ' + message.sobject.Name + ' has been updated'
       },
       'device_types': 'all'
     };
-    $fh.push({
-      'act': 'push',
-      'type': 'prod',
-      'params': pushRequest
-    }, function(err, res) {
-      if (err) {
-        console.log(err.toString())
-      } else {
-        console.log("Push status from UA : " + res.status);
-      }
-    });
+    // TODO Uncomment once $fh.push env var for UA is in place
+//    $fh.push({
+//      'act': 'push',
+//      'type': 'prod',
+//      'params': pushRequest
+//    }, function(err, res) {
+//      if (err) {
+//        console.log(err.toString())
+//      } else {
+//        console.log("Push status from UA : " + res.status);
+//      }
+//    });
+      request.post({
+          'url' : 'https://C_46YkXOShaTykw4E4UVIA:uBctSeGVRsWlr32G4Cng2A@go.urbanairship.com:443/api/push',
+          'headers' : {
+            'Accept' : 'application/vnd.urbanairship+json; version=3;'
+          },
+          json : pushRequest
+      }, function(err, res, body){
+        if (err){
+          return console.log('error pushing');
+        }
+        return console.log('push succeeded');
+      });
+      // end request
+
+
   });
 });
-

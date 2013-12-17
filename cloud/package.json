@@ -5,6 +5,7 @@
     "fh-webapp" : "*",
     "fh-api-beta" : "*",
     "express" : "3.3.4",
-    "node-salesforce": "*"
+    "node-salesforce": "*",
+    "request" : "*"
   }
 }
