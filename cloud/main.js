@@ -181,3 +181,22 @@ function injectLatLngAndServe(account, cb) {
     });
   });
 }
+
+
+conn = new sf.Connection({
+  loginUrl: 'https://login.salesforce.com'
+});
+
+conn.login(process.env.SF_TOPIC_USERNAME, process.env.SF_TOPIC_PASSWORD, function(err) {
+  if (err) {
+    return console.log('Error connecting ');
+  }
+  console.log('authed');
+  conn.streaming.topic("AccountChanges2").subscribe(function(message) {
+    console.log('Event Type : ' + message.event.type);
+    console.log('Event Created : ' + message.event.createdDate);
+    console.log('Object Id : ' + message.sobject.Id);
+    console.log(JSON.stringify(message.sobject));
+  });
+});
+
