@@ -192,11 +192,27 @@ conn.login(process.env.SF_TOPIC_USERNAME, process.env.SF_TOPIC_PASSWORD, functio
     return console.log('Error connecting ');
   }
   console.log('authed');
+
   conn.streaming.topic("AccountChanges2").subscribe(function(message) {
-    console.log('Event Type : ' + message.event.type);
-    console.log('Event Created : ' + message.event.createdDate);
-    console.log('Object Id : ' + message.sobject.Id);
     console.log(JSON.stringify(message.sobject));
+    var pushRequest = {
+      'audience': 'all',
+      'notification': {
+        'alert': 'Salesforce Account ' + sobject.Name + 'has been updated'
+      },
+      'device_types': 'all'
+    };
+    $fh.push({
+      'act': 'push',
+      'type': 'prod',
+      'params': pushRequest
+    }, function(err, res) {
+      if (err) {
+        console.log(err.toString())
+      } else {
+        console.log("Push status from UA : " + res.status);
+      }
+    });
   });
 });
 
