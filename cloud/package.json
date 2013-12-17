@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "dependencies" : {
     "fh-webapp" : "*",
-    "fh-api" : "*",
+    "fh-api-beta" : "*",
     "express" : "3.3.4",
     "node-salesforce": "*"
   }
