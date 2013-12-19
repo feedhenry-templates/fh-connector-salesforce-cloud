@@ -1,6 +1,47 @@
-#Cloud Code for SF Demo App
+#SalesForce Connector
 
-## Registering a new Salesforce Push Topic to listen for:
+## Login
+The login service exposes SalesForce login directly, when not using FH AAA Authentication.
+POST /cloud/**login**
+{ username : "", password : ""}
+
+## List Accounts
+POST /cloud/**listAccounts**
+{ accessToken : '', instanceUrl : '' }
+
+## List Cases
+POST /cloud/**listCases**
+{ accessToken : '', instanceUrl : '' }
+
+## List Campaigns
+POST /cloud/**listCampaigns**
+{ accessToken : '', instanceUrl : '' }
+
+## Get Account Details
+POST /cloud/**getAccountDetails**
+{ 
+  accountId : '', 
+  auth : { 
+    accessToken : '', 
+    instanceUrl : '' 
+  }
+}
+
+## Get Case Details
+POST /cloud/**getCaseDetails**
+{ 
+  caseId : '', 
+  auth : { 
+    accessToken : '', 
+    instanceUrl : '' 
+  }
+}
+
+
+
+## Using Push Topics: Registering a new Salesforce Push Topic to listen for:
+Part of the salesforce connector is the ability to set up Push Notifications based on an existing topic defined by a developer in Salesforce. To define such a topic - in this example, changes to the Account object: 
+
 1. Log into salesforce
 2. Click username - > Developer Console (pops up)
 3. In dev console popup, Debug -> Open Annon Execute Window
