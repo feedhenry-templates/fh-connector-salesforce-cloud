@@ -4,5 +4,22 @@
   "repoUrl": "https://github.com/feedhenry/fh-connector-salesforce-cloud.git",
   "repoBranch": "refs/heads/master",
   "image": "public/img/cloud_plugins/salesforce.png",
-  "category": "SaaS"
+  "category": "SaaS",
+  "config": [
+      {
+        "desc": "Your salesforce.com login",
+        "varName": "SALESFORCE_USERNAME"
+      },
+      {
+        "desc": "Your salesforce.com password",
+        "varName": "SALESFORCE_PASSWORD",
+        "type": "password"
+      },
+      {
+        "desc": "Your salesforce security token (optional - not needed if you've added our cloud to your access whitelist)",
+        "optional": true,
+        "varName": "SALESFORCE_SECURITYTOKEN",
+        "type": "password"
+      }
+  ]
 }
