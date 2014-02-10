@@ -5,7 +5,7 @@
   "repoBranch": "refs/heads/master",
   "image": "public/img/cloud_plugins/salesforce.png",
   "category": "SaaS",
-  "config": [
+  "configuration": [
       {
         "desc": "Your salesforce.com login",
         "varName": "SALESFORCE_USERNAME"
