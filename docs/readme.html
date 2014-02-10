@@ -1,0 +1,170 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>SalesForce Connector API</title><link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"><link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,700|Inconsolata|Raleway:200"><style>/* Highlight.js Theme */
+.tomorrow-comment,pre .comment,pre .title{color:#8e908c}.tomorrow-red,pre .attribute,pre .css .class,pre .css .id,pre .css .pseudo,pre .html .doctype,pre .regexp,pre .ruby .constant,pre .tag,pre .variable,pre .xml .doctype,pre .xml .pi,pre .xml .tag .title{color:#c82829}.tomorrow-orange,pre .built_in,pre .constant,pre .literal,pre .number,pre .params,pre .preprocessor{color:#f5871f}.tomorrow-yellow,pre .class,pre .css .rules .attribute,pre .ruby .class .title{color:#eab700}.tomorrow-green,pre .header,pre .inheritance,pre .ruby .symbol,pre .string,pre .value,pre .xml .cdata{color:#718c00}.tomorrow-aqua,pre .css .hexcolor{color:#3e999f}.tomorrow-blue,pre .coffeescript .title,pre .function,pre .javascript .title,pre .perl .sub,pre .python .decorator,pre .python .title,pre .ruby .function .title,pre .ruby .title .keyword{color:#4271ae}.tomorrow-purple,pre .javascript .function,pre .keyword{color:#8959a8}pre code{display:block;background:#fff;color:#4d4d4c;font-family:Menlo,Monaco,Consolas,monospace;line-height:1.5;border:1px solid #ccc;padding:10px}</style><style>body,
+h4,
+h5 {
+  font-family: 'Roboto' sans-serif !important;
+}
+h1,
+h2,
+h3,
+.aglio {
+  font-family: 'Raleway' sans-serif !important;
+}
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a {
+  display: none;
+}
+h1:hover a,
+h2:hover a,
+h3:hover a,
+h4:hover a,
+h5:hover a {
+  display: inline;
+}
+code {
+  color: #444;
+  background-color: #ddd;
+  font-family: 'Inconsolata' monospace !important;
+}
+a[data-target] {
+  cursor: pointer;
+}
+h4 {
+  font-size: 100%;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.back-to-top {
+  position: fixed;
+  z-index: 1;
+  bottom: 0px;
+  right: 24px;
+  padding: 4px 8px;
+  background-color: #eee;
+  text-decoration: none !important;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  border-left: 1px solid rgba(0,0,0,0.1);
+  border-right: 1px solid rgba(0,0,0,0.1);
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+.panel {
+  overflow: hidden;
+}
+.panel-heading code {
+  color: #c7254e;
+  background-color: transparent;
+}
+.panel-heading h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+a.list-group-item {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+a.list-group-item.heading {
+  background-color: #f5f5f5;
+}
+.list-group-item.collapse {
+  display: none;
+}
+</style></head><body><a href="#top" class="text-muted back-to-top"><i class="fa fa-toggle-up"></i>&nbsp;Back to top</a><div class="container"><div class="row"><nav id="nav" style="margin-top: 38px;" class="col-md-3 collapse hidden-sm hidden-xs"><div class="list-group"><a href="#salesforce-connector-api" class="list-group-item heading">SalesForce Connector API</a><a href="#salesforce-connector-api-login" class="list-group-item"><i class="fa fa-plus-square"></i>&nbsp;Login</a><a href="#salesforce-connector-api-list-accounts" class="list-group-item"><i class="fa fa-plus-square"></i>&nbsp;List Accounts</a><a href="#salesforce-connector-api-get-account-details" class="list-group-item"><i class="fa fa-plus-square"></i>&nbsp;Get Account Details</a><a href="#salesforce-connector-api-list-cases" class="list-group-item"><i class="fa fa-plus-square"></i>&nbsp;List Cases</a><a href="#salesforce-connector-api-get-case-details" class="list-group-item"><i class="fa fa-plus-square"></i>&nbsp;Get Case Details</a><a href="#salesforce-connector-api-list-campaigns" class="list-group-item"><i class="fa fa-plus-square"></i>&nbsp;List Campaigns</a></div><div class="list-group"><a href="#push-topics" class="list-group-item heading">Push Topics</a></div></nav><div class="col-md-9"><div><header><div class="page-header"><h1 id="top">SalesForce Connector API</h1></div></header><div class="description"><p>The Salesforce FeedHenry Connector API. </p>
+</div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="salesforce-connector-api">SalesForce Connector API&nbsp;<a href="#salesforce-connector-api"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><h4 id="salesforce-connector-api-login">Login&nbsp;<a href="#salesforce-connector-api-login"><i class="fa fa-link"></i></a></h4><p>The login service exposes SalesForce login directly, when not using FH AAA Authentication.</p>
+<section id="salesforce-connector-api-login-post" class="panel panel-success"><div class="panel-heading"><span style="text-transform: lowercase" class="pull-right">Login</span><a href="#salesforce-connector-api-login-post" class="btn btn-xs btn-success">POST</a>&nbsp;<code>/cloud/login</code></div><div class="panel-body"><p>Login to Salesforce</p>
+</div><ul class="list-group"><li class="list-group-item"><strong>Request</strong><a data-toggle="collapse" data-target="#961825" class="pull-right">Toggle</a></li><li id="961825" class="list-group-item collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">username</span>": <span class="hljs-value"><span class="hljs-string">"user"</span></span>,
+  "<span class="hljs-attribute">password</span>": <span class="hljs-value"><span class="hljs-string">"password"</span>
+</span>}
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#652758" class="pull-right">Toggle</a></li><li id="652758" class="list-group-item collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">status</span>": <span class="hljs-value"><span class="hljs-string">"TODO - accesstoken or something returned??"</span>
+</span>}
+</code></pre></li></ul></section><h4 id="salesforce-connector-api-list-accounts">List Accounts&nbsp;<a href="#salesforce-connector-api-list-accounts"><i class="fa fa-link"></i></a></h4><p>List SalesForce Accounts</p>
+<section id="salesforce-connector-api-list-accounts-post" class="panel panel-success"><div class="panel-heading"><span style="text-transform: lowercase" class="pull-right">List Accounts</span><a href="#salesforce-connector-api-list-accounts-post" class="btn btn-xs btn-success">POST</a>&nbsp;<code>/cloud/listAccounts</code></div><ul class="list-group"><li class="list-group-item"><strong>Request</strong><a data-toggle="collapse" data-target="#294982" class="pull-right">Toggle</a></li><li id="294982" class="list-group-item collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">accessToken</span>": <span class="hljs-value"><span class="hljs-string">""</span></span>,
+  "<span class="hljs-attribute">instanceUrl</span>": <span class="hljs-value"><span class="hljs-string">""</span> 
+</span>}
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#248594" class="pull-right">Toggle</a></li><li id="248594" class="list-group-item collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">accounts</span>": <span class="hljs-value">[<span class="hljs-string">"TODO"</span>]
+</span>}
+</code></pre></li></ul></section><h4 id="salesforce-connector-api-get-account-details">Get Account Details&nbsp;<a href="#salesforce-connector-api-get-account-details"><i class="fa fa-link"></i></a></h4><p>Get SalesForce Account</p>
+<section id="salesforce-connector-api-get-account-details-post" class="panel panel-success"><div class="panel-heading"><span style="text-transform: lowercase" class="pull-right">Get Account Details</span><a href="#salesforce-connector-api-get-account-details-post" class="btn btn-xs btn-success">POST</a>&nbsp;<code>/cloud/getAccountDetails</code></div><ul class="list-group"><li class="list-group-item"><strong>Request</strong><a data-toggle="collapse" data-target="#634871" class="pull-right">Toggle</a></li><li id="634871" class="list-group-item collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">accountId</span>": <span class="hljs-value"><span class="hljs-string">""</span></span>,
+  "<span class="hljs-attribute">auth</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">instanceUrl</span>": <span class="hljs-value"><span class="hljs-string">""</span></span>,
+    "<span class="hljs-attribute">accessToken</span>": <span class="hljs-value"><span class="hljs-string">""</span>
+  </span>}
+</span>}
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#175110" class="pull-right">Toggle</a></li><li id="175110" class="list-group-item collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">account</span>": <span class="hljs-value">[<span class="hljs-string">"TODO"</span>]
+</span>}
+</code></pre></li></ul></section><h4 id="salesforce-connector-api-list-cases">List Cases&nbsp;<a href="#salesforce-connector-api-list-cases"><i class="fa fa-link"></i></a></h4><p>List SalesForce Cases</p>
+<section id="salesforce-connector-api-list-cases-post" class="panel panel-success"><div class="panel-heading"><span style="text-transform: lowercase" class="pull-right">List Cases</span><a href="#salesforce-connector-api-list-cases-post" class="btn btn-xs btn-success">POST</a>&nbsp;<code>/cloud/listCases</code></div><ul class="list-group"><li class="list-group-item"><strong>Request</strong><a data-toggle="collapse" data-target="#541366" class="pull-right">Toggle</a></li><li id="541366" class="list-group-item collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">accessToken</span>": <span class="hljs-value"><span class="hljs-string">""</span></span>,
+  "<span class="hljs-attribute">instanceUrl</span>": <span class="hljs-value"><span class="hljs-string">""</span> 
+</span>}
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#825044" class="pull-right">Toggle</a></li><li id="825044" class="list-group-item collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">cases</span>": <span class="hljs-value">[<span class="hljs-string">"TODO"</span>]
+</span>}
+</code></pre></li></ul></section><h4 id="salesforce-connector-api-get-case-details">Get Case Details&nbsp;<a href="#salesforce-connector-api-get-case-details"><i class="fa fa-link"></i></a></h4><p>Get SalesForce Case</p>
+<section id="salesforce-connector-api-get-case-details-post" class="panel panel-success"><div class="panel-heading"><span style="text-transform: lowercase" class="pull-right">Get Case Details</span><a href="#salesforce-connector-api-get-case-details-post" class="btn btn-xs btn-success">POST</a>&nbsp;<code>/cloud/getCaseDetails</code></div><ul class="list-group"><li class="list-group-item"><strong>Request</strong><a data-toggle="collapse" data-target="#291343" class="pull-right">Toggle</a></li><li id="291343" class="list-group-item collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">accountId</span>": <span class="hljs-value"><span class="hljs-string">""</span></span>,
+  "<span class="hljs-attribute">auth</span>": <span class="hljs-value">{
+    "<span class="hljs-attribute">instanceUrl</span>": <span class="hljs-value"><span class="hljs-string">""</span></span>,
+    "<span class="hljs-attribute">accessToken</span>": <span class="hljs-value"><span class="hljs-string">""</span>
+  </span>}
+</span>}
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#424475" class="pull-right">Toggle</a></li><li id="424475" class="list-group-item collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">account</span>": <span class="hljs-value">[<span class="hljs-string">"TODO"</span>]
+</span>}
+</code></pre></li></ul></section><h4 id="salesforce-connector-api-list-campaigns">List Campaigns&nbsp;<a href="#salesforce-connector-api-list-campaigns"><i class="fa fa-link"></i></a></h4><p>List SalesForce Campaigns</p>
+<section id="salesforce-connector-api-list-campaigns-post" class="panel panel-success"><div class="panel-heading"><span style="text-transform: lowercase" class="pull-right">List Campaigns</span><a href="#salesforce-connector-api-list-campaigns-post" class="btn btn-xs btn-success">POST</a>&nbsp;<code>/cloud/listCampaigns</code></div><ul class="list-group"><li class="list-group-item"><strong>Request</strong><a data-toggle="collapse" data-target="#386441" class="pull-right">Toggle</a></li><li id="386441" class="list-group-item collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">accessToken</span>": <span class="hljs-value"><span class="hljs-string">""</span></span>,
+  "<span class="hljs-attribute">instanceUrl</span>": <span class="hljs-value"><span class="hljs-string">""</span> 
+</span>}
+</code></pre></li><li class="list-group-item"><strong>Response&nbsp;&nbsp;<code>200</code></strong><a data-toggle="collapse" data-target="#385386" class="pull-right">Toggle</a></li><li id="385386" class="list-group-item collapse"><h5>Headers</h5><pre><code><span class="hljs-attribute">Content-Type</span>: <span class="hljs-string">application/json</span><br></code></pre><h5>Body</h5><pre><code>{
+  "<span class="hljs-attribute">Campaigns</span>": <span class="hljs-value">[<span class="hljs-string">"TODO"</span>]
+</span>}
+</code></pre></li></ul></section></div></div></div><div><div class="panel panel-default"><div class="panel-heading"><h3 id="push-topics">Push Topics&nbsp;<a href="#push-topics"><i class="fa fa-link"></i></a></h3></div><div class="panel-body"><p>Registering a new Salesforce Push Topic to listen for. Part of the salesforce connector is the ability to set up Push Notifications based on an existing topic defined by a developer in Salesforce. To define such a topic - in this example, changes to the Account object: </p>
+<ol>
+<li><p>Log into salesforce</p>
+</li>
+<li><p>Click username - &gt; Developer Console (pops up)</p>
+</li>
+<li><p>In dev console popup, Debug -&gt; Open Annon Execute Window</p>
+</li>
+<li><p>Enter this code, and click execute - you have registered a push topic. Change query to alter data that comes back.</p>
+<p> PushTopic pushTopic = new PushTopic();
+ pushTopic.Name = ‘AccountChanges2’;
+ pushTopic.Query = ‘SELECT Id, Name FROM Account’;
+ pushTopic.ApiVersion = 29.0;
+ pushTopic.NotifyForOperationCreate = true;
+ pushTopic.NotifyForOperationUpdate = true;
+ pushTopic.NotifyForOperationUndelete = true;
+ pushTopic.NotifyForOperationDelete = true;
+ pushTopic.NotifyForFields = ‘All’;
+ insert pushTopic;</p>
+</li>
+<li><p>Set up environment variables for salesforce topic polling user, INCLUDING security token - process.env.SF_TOPIC_USERNAME, process.env.SF_TOPIC_PASSWORD</p>
+</li>
+<li><p>Register for this notification in node-salesforce</p>
+</li>
+</ol>
+<p>More info: <a href="http://wiki.developerforce.com/page/Getting_Started_with_the_Force.com_Streaming_API">http://wiki.developerforce.com/page/Getting_Started_with_the_Force.com_Streaming_API</a></p>
+</div></div></div></div></div></div><p style="text-align: center;" class="text-muted">Generated by <a href="https://github.com/danielgtaylor/aglio" class="aglio">aglio</a> on 10 Feb 2014</p><div id="localFile" style="display: none; position: absolute; top: 0; left: 0; width: 100%; color: white; background: red; font-size: 150%; text-align: center; padding: 1em;">This page may not display correctly when opened as a local file. Instead, view it from a web server.
+
+</div></body><script src="//code.jquery.com/jquery-1.10.1.min.js"></script><script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script><script>(function() {
+  if (location.protocol === 'file:') {
+    document.getElementById('localFile').style.display = 'block';
+  }
+
+}).call(this);
+</script><script>(function() {
+  $('table').addClass('table');
+
+}).call(this);
+</script></html>
