@@ -4,6 +4,7 @@
   "repoUrl": "https://github.com/feedhenry/fh-connector-salesforce-cloud.git",
   "repoBranch": "refs/heads/master",
   "image": "public/img/cloud_plugins/salesforce.png",
+  "docs": "https://raw2.github.com/feedhenry/fh-connector-salesforce-cloud/master/README.md",
   "category": "SaaS",
   "configuration": [
       {

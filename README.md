@@ -17,16 +17,14 @@ Login to Salesforce
 + Request (application/json)
 
     + Body
-
             {
-              "username": "user",
-              "password": "password"
+              "username": "user1",
+              "password": "password1"
             }
 
 + Response 200 (application/json)
 
       + Body
-
             {
               "status": "TODO - accesstoken or something returned??"
             }
