@@ -1,4 +1,5 @@
-.idea
-.fhclocal
 node_modules
 *~
+cov-*
+coverage
+plato
