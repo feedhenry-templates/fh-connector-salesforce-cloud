@@ -2,6 +2,47 @@ var http = require('http'),
 sf = require('node-salesforce'),
 request = require('request');
 
+function injectLatLngAndServe(account, cb) {
+  var url,
+  data = '';
+
+  var address = [
+    account.BillingStreet,
+    account.BillingCity,
+    (account.BillingCountry || '')
+  ].join(', ');
+
+  address = address.replace(/ /g, '+');
+
+  url = 'http://maps.googleapis.com/maps/api/geocode/json?address=' +
+  address + '&sensor=false';
+
+  http.get(url, function(res) {
+
+    if (res.statusCode !== 200) {
+      return cb(null, "0,0");
+    }
+
+    res.setEncoding('utf8');
+
+    res.on('data', function (chunk) {
+      data += chunk;
+    });
+
+    res.on('end', function() {
+      var jsonRes = JSON.parse(data);
+
+      if (jsonRes.status === 'OK') {
+        account.latlng = jsonRes.results[0].geometry.location.lat + ',' + jsonRes.results[0].geometry.location.lng;
+        console.log(account);
+        return cb(null, account);
+      } else {
+        return cb(null, '0,0');
+      }
+    });
+  });
+}
+
 /**
  * Attempt to login to Salesforce through the SOAP mechanism given a username
  * and password.
@@ -142,49 +183,8 @@ exports.getCaseDetails = function(params, cb) {
   });
 };
 
-function injectLatLngAndServe(account, cb) {
-  var url,
-  data = '';
 
-  var address = [
-    account.BillingStreet,
-    account.BillingCity,
-    (account.BillingCountry || '')
-  ].join(', ');
-
-  address = address.replace(/ /g, '+');
-
-  url = 'http://maps.googleapis.com/maps/api/geocode/json?address=' +
-  address + '&sensor=false';
-
-  http.get(url, function(res) {
-
-    if (res.statusCode !== 200) {
-      return cb(null, "0,0");
-    }
-
-    res.setEncoding('utf8');
-
-    res.on('data', function (chunk) {
-      data += chunk;
-    });
-
-    res.on('end', function() {
-      var jsonRes = JSON.parse(data);
-
-      if (jsonRes.status === 'OK') {
-        account.latlng = jsonRes.results[0].geometry.location.lat + ',' + jsonRes.results[0].geometry.location.lng;
-        console.log(account);
-        return cb(null, account);
-      } else {
-        return cb(null, '0,0');
-      }
-    });
-  });
-}
-
-
-conn = new sf.Connection({
+var conn = new sf.Connection({
   loginUrl: 'https://login.salesforce.com'
 });
 
@@ -223,8 +223,9 @@ conn.login(process.env.SF_TOPIC_USERNAME, process.env.SF_TOPIC_PASSWORD, functio
           json : pushRequest
       }, function(err, res, body){
         if (err){
-          return console.log('error pushing');
+          return console.error('error pushing', err);
         }
+        console.log(res, body);
         return console.log('push succeeded');
       });
       // end request
