@@ -1,6 +1,7 @@
 FORMAT: 1A
 
 # SalesForce Connector API
+[![Dependency Status](https://img.shields.io/david/feedhenry-templates/fh-connector-salesforce-cloud.svg?style=flat-square)](https://david-dm.org/feedhenry-templates/fh-connector-salesforce-cloud)
 
 The Salesforce FeedHenry Connector API. 
 
