@@ -1,170 +1,212 @@
-FORMAT: 1A
-
 # SalesForce Connector API
+
 [![Dependency Status](https://img.shields.io/david/feedhenry-templates/fh-connector-salesforce-cloud.svg?style=flat-square)](https://david-dm.org/feedhenry-templates/fh-connector-salesforce-cloud)
 
-The Salesforce FeedHenry Connector API. 
+* [Group SalesForce Connector API](#group-salesforce-connector-api)
+  + [Login](#login)
+  + [List Accounts](#list-accounts)
+  + [Get Account Details](#get-account-details)
+  + [List Cases](#list-cases)
+  + [Get Case Details](#get-case-details)
+  + [List Campaigns](#list-campaigns)
+  + [Group Push Topics](#group-push-topics)
+* [Tests](#tests)
+  + [Unit tests](#unit-tests)
+  + [Unit coverage](#unit-coverage)
 
-# Group SalesForce Connector API
+## Group SalesForce Connector API
 
-# Login [/cloud/login]
+### Login 
 
 The login service exposes SalesForce login directly, when not using FH AAA Authentication.
 
-## Login [POST] 
+|              |              |
+|--------------|--------------|
+| Endpoint     | /cloud/login |
+| HTTP Method  | POST         |
 
-Login to Salesforce
+#### Request (application/json)
 
-+ Request (application/json)
+##### Body
 
-    + Body
-            {
-              "username": "user1",
-              "password": "password1"
-            }
+```json
+{
+  "username": "user1",
+  "password": "password1"
+}
+```
 
-+ Response 200 (application/json)
+#### Response 200 (application/json)
 
-      + Body
-            {
-              "status": "TODO - accesstoken or something returned??"
-            }
+##### Body
 
-# List Accounts [/cloud/listAccounts]
+```json
+{
+  "status": "TODO - accesstoken or something returned??"
+}
+```
+
+### List Accounts 
 
 List SalesForce Accounts
 
-## List Accounts [POST]
+|              |                     |
+|--------------|---------------------|
+| Endpoint     | /cloud/listAccounts |
+| HTTP Method  | POST                |
 
-+ Request (application/json)
+#### Request (application/json)
 
-    + Body
+##### Body
 
-            {
-              "accessToken": "",
-              "instanceUrl": "" 
-            }
+```json
+{
+  "accessToken": "",
+  "instanceUrl": "" 
+}
+```
 
-+ Response 200 (application/json)
+#### Response 200 (application/json)
 
-      + Body
+##### Body
 
-            {
-              "accounts": ["TODO"]
-            }
+```json
+{
+  "accounts": ["TODO"]
+}
+```
 
-# Get Account Details [/cloud/getAccountDetails]
+### Get Account Details
 
-Get SalesForce Account
+|              |                          |
+|--------------|--------------------------|
+| Endpoint     | /cloud/getAccountDetails |
+| HTTP Method  | POST                     |
 
-## Get Account Details [POST]
+#### Request (application/json)
 
-+ Request (application/json)
+##### Body
 
-    + Body
+```json
+{
+  "accountId": "",
+  "auth": {
+    "instanceUrl": "",
+    "accessToken": ""
+  }
+}
+``` 
 
-            {
-              "accountId": "",
-              "auth": {
-                "instanceUrl": "",
-                "accessToken": ""
-              }
-            }
+#### Response 200 (application/json)
 
-+ Response 200 (application/json)
+##### Body
 
-      + Body
+```json
+{
+  "account": ["TODO"]
+}
+```
 
-            {
-              "account": ["TODO"]
-            }
+### List Cases
 
+|              |                          |
+|--------------|--------------------------|
+| Endpoint     | /cloud/listCases         |
+| HTTP Method  | POST                     |
 
-# List Cases [/cloud/listCases]
+#### Request (application/json)
 
-List SalesForce Cases
+##### Body
 
-## List Cases [POST]
+```json
+{
+  "accessToken": "",
+  "instanceUrl": "" 
+}
+```
 
-+ Request (application/json)
+#### Response 200 (application/json)
 
-    + Body
+##### Body
 
-            {
-              "accessToken": "",
-              "instanceUrl": "" 
-            }
+```json
+{
+  "cases": ["TODO"]
+}
+```
 
-+ Response 200 (application/json)
+### Get Case Details
 
-      + Body
+|              |                          |
+|--------------|--------------------------|
+| Endpoint     | /cloud/getCaseDetails    |
+| HTTP Method  | POST                     |
 
-            {
-              "cases": ["TODO"]
-            }
+#### Request (application/json)
 
-# Get Case Details [/cloud/getCaseDetails]
+##### Body
 
-Get SalesForce Case
+```json
+{
+  "accountId": "",
+  "auth": {
+    "instanceUrl": "",
+    "accessToken": ""
+  }
+}
+```
 
-## Get Case Details [POST]
+#### Response 200 (application/json)
 
-+ Request (application/json)
+##### Body
 
-    + Body
+```json
+{
+  "account": ["TODO"]
+}
+```
 
-            {
-              "accountId": "",
-              "auth": {
-                "instanceUrl": "",
-                "accessToken": ""
-              }
-            }
+### List Campaigns
 
-+ Response 200 (application/json)
+|              |                          |
+|--------------|--------------------------|
+| Endpoint     | /cloud/listCampaigns     |
+| HTTP Method  | POST                     |
 
-      + Body
+#### Request (application/json)
 
-            {
-              "account": ["TODO"]
-            }
+##### Body
 
+```json
+{
+  "accessToken": "",
+  "instanceUrl": "" 
+}
+```
 
-# List Campaigns [/cloud/listCampaigns]
+#### Response 200 (application/json)
 
-List SalesForce Campaigns
+##### Body
 
-## List Campaigns [POST]
+```json
+{
+  "Campaigns": ["TODO"]
+}
+```
 
-+ Request (application/json)
-
-    + Body
-
-            {
-              "accessToken": "",
-              "instanceUrl": "" 
-            }
-
-+ Response 200 (application/json)
-
-      + Body
-
-            {
-              "Campaigns": ["TODO"]
-            }
-
-# Group Push Topics
+### Group Push Topics
 
 Registering a new Salesforce Push Topic to listen for. Part of the salesforce connector is the ability to set up Push Notifications based on an existing topic defined by a developer in Salesforce. To define such a topic - in this example, changes to the Account object: 
 
 1. Log into salesforce
 
-2. Click username - > Developer Console (pops up)
+1. Click username - > Developer Console (pops up)
 
-3. In dev console popup, Debug -> Open Annon Execute Window
+1. In dev console popup, Debug -> Open Annon Execute Window
 
-4. Enter this code, and click execute - you have registered a push topic. Change query to alter data that comes back.
+1. Enter this code, and click execute - you have registered a push topic. Change query to alter data that comes back.
 
+    ```java
     PushTopic pushTopic = new PushTopic();
     pushTopic.Name = 'AccountChanges2';
     pushTopic.Query = 'SELECT Id, Name FROM Account';
@@ -175,9 +217,26 @@ Registering a new Salesforce Push Topic to listen for. Part of the salesforce co
     pushTopic.NotifyForOperationDelete = true;
     pushTopic.NotifyForFields = 'All';
     insert pushTopic;
+    ```
     
-5. Set up environment variables for salesforce topic polling user, INCLUDING security token - process.env.SF_TOPIC_USERNAME, process.env.SF_TOPIC_PASSWORD
+1. Set up environment variables for salesforce topic polling user, INCLUDING security token - process.env.SF_TOPIC_USERNAME, process.env.SF_TOPIC_PASSWORD
 
-6. Register for this notification in node-salesforce
+1. Register for this notification in node-salesforce
 
 More info: http://wiki.developerforce.com/page/Getting_Started_with_the_Force.com_Streaming_API
+
+## Tests
+
+All the tests are in the "test/" directory. The cloud app is using mocha as the test runner. 
+
+### Unit tests
+
+```shell
+npm run unit
+```
+
+### Unit coverage
+
+```shell
+npm run coverage
+```
