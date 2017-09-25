@@ -188,47 +188,45 @@ var conn = new sf.Connection({
   loginUrl: 'https://login.salesforce.com'
 });
 
-conn.login(process.env.SF_TOPIC_USERNAME, process.env.SF_TOPIC_PASSWORD, function(err) {
+// append Security Token to password if it exists
+var pwordAndToken = process.env.SALESFORCE_PASSWORD + (process.env.SALESFORCE_SECURITYTOKEN || '');
+conn.login(process.env.SALESFORCE_USERNAME, pwordAndToken, function(err) {
   if (err) {
     return console.log('Error connecting ');
   }
-  console.log('authed');
+  console.log('Logged in as:', process.env.SALESFORCE_USERNAME);
 
+  // subscribe to Account changes and send push notifications on changes
   conn.streaming.topic("AccountChanges2").subscribe(function(message) {
     console.log(JSON.stringify(message.sobject));
-    var pushRequest = {
-      'audience': 'all',
-      'notification': {
-        'alert': 'Salesforce Account ' + message.sobject.Name + ' has been updated'
-      },
-      'device_types': 'all'
-    };
-    // TODO Uncomment once $fh.push env var for UA is in place
-//    $fh.push({
-//      'act': 'push',
-//      'type': 'prod',
-//      'params': pushRequest
-//    }, function(err, res) {
-//      if (err) {
-//        console.log(err.toString())
-//      } else {
-//        console.log("Push status from UA : " + res.status);
-//      }
-//    });
-      request.post({
-          'url' : 'https://C_46YkXOShaTykw4E4UVIA:uBctSeGVRsWlr32G4Cng2A@go.urbanairship.com:443/api/push',
-          'headers' : {
-            'Accept' : 'application/vnd.urbanairship+json; version=3;'
-          },
-          json : pushRequest
-      }, function(err, res, body){
-        if (err){
-          return console.error('error pushing', err);
-        }
-        console.log(res, body);
-        return console.log('push succeeded');
-      });
-      // end request
+
+    var message = 'Salesforce Account ' + message.sobject.Name + ' has been updated';
+    // send push notification to specific project
+    pushUpdates(message);
+    
+  // TODO Uncomment once $fh.push is in place for client app
+    function pushUpdates(message){
+      // var push = $fh.push.getPushClient({
+      //   widget: 'CLOUD_WIDGET_VALUE',
+      //   instance: 'CLOUD_INSTANCE_VALUE',
+      //   appapikey: 'CLOUD_APP_API_KEY_VALUE'
+      // });
+
+      // var msgObj = {
+      //   alert: message
+      // };
+      // var options = {
+      //   broadcast: true
+      // };
+
+      // push(message,options,function(err,res){
+      //   if(err){
+      //     console.error('Push Failed',err);
+      //   } else {
+      //     console.log('Push status:',res.status);
+      //   }
+      // })
+    }
 
 
   });
